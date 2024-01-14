@@ -31,14 +31,12 @@ class TestAccountService(TestCase):
     @classmethod
     def setUpClass(cls):
         """Run once before all tests"""
-        
         app.config["TESTING"] = True
         app.config["DEBUG"] = False
         talisman.force_https = False
         app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URI
         app.logger.setLevel(logging.CRITICAL)
         init_db(app)
-        
 
     @classmethod
     def tearDownClass(cls):
@@ -163,4 +161,4 @@ class TestAccountService(TestCase):
         response = self.client.get('/', environ_overrides=HTTPS_ENVIRON)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         # Check for the CORS header
-        self.assertEqual(response.headers.get('Access-Control-Allow-Origin'), '*')                  
+        self.assertEqual(response.headers.get('Access-Control-Allow-Origin'), '*')
